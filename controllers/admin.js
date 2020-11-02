@@ -10,12 +10,13 @@ exports.getAddProduct = (req, res, next) => {
 }
 
 exports.postAddProduct = (req, res, next) => {
-    req.user.createProduct({
-        title: req.body.title,
-        imageUrl: req.body.imageUrl,
-        price: req.body.price,
-        description: req.body.description,
-    })
+    const product = new Product(
+        req.body.title,
+        req.body.price,
+        req.body.imageUrl,
+        req.body.description,
+    );
+    product.save()
         .then(result => {
             // console.log(result);
             console.log('Created Product');
@@ -25,7 +26,6 @@ exports.postAddProduct = (req, res, next) => {
             console.log(err);
         });
 }
-
 
 // exports.getProducts = (req, res, next) => {
 //     req.user.getProducts()
